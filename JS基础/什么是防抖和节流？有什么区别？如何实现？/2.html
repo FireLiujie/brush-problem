@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>什么是防抖和节流？有什么区别？如何实现？</title>
+  </head>
+  <body>
+    <input type="text" id="input" />
+    <script>
+      let input = document.querySelector('#input')
+      // 防抖
+      function debounce(func, time) {
+        let timer = null
+        return () => {
+          if (timer) clearTimeout(timer)
+          timer = setTimeout(_ => {
+            func.apply(this, arguments)
+          }, time)
+        }
+      }
+      // 节流
+      function throttle(func, time) {
+        let activeTime = 0
+        return () => {
+          const current = Date.now()
+          if (current - activeTime > time) {
+            func.apply(this, arguments)
+            activeTime = Date.now()
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
